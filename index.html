@@ -1180,7 +1180,7 @@
                         id="kpi-income-month">₩0</span></div>
             </div>
             <div class="kpi-card kpi-expense">
-                <div class="kpi-header"><span class="kpi-badge">총 지출</span><button class="btn kpi-manage-btn" onclick="openRecurringModal('지출')">+ 추가</button></div>
+                <div class="kpi-header"><span class="kpi-badge">총 지출</span><button class="btn kpi-manage-btn" onclick="openExpenseAddMenu()">+ 추가</button></div>
                 <div class="kpi-amount" id="kpi-total-expense">₩0</div>
                 <div class="kpi-sub"><span class="kpi-sub-dot"
                         style="background:var(--expense-color)"></span>이번달&nbsp;<span class="kpi-sub-val"
@@ -1223,6 +1223,17 @@
             </div>
         </div>
 
+        <div class="formula-modal-overlay" id="expense-add-menu-overlay" onclick="if(event.target===this)closeExpenseAddMenu()">
+            <div class="formula-modal" role="dialog" aria-modal="true" aria-labelledby="expense-add-menu-title">
+                <div class="formula-modal-heading"><span id="expense-add-menu-title">지출 추가</span><button class="btn" onclick="closeExpenseAddMenu()">닫기</button></div>
+                <p class="formula-modal-note">할부는 거래내역에 새 항목을 만들지 않고, 할부 기간에 해당하는 월 납부액만 지출에 반영합니다. 정기 지출은 매월 거래내역을 생성합니다.</p>
+                <div class="formula-options" style="margin-bottom:0;">
+                    <button class="btn btn-primary" type="button" onclick="openExpenseInstallmentManager()">할부 별도 관리</button>
+                    <button class="btn" type="button" onclick="openExpenseRecurringManager()">정기 지출 등록</button>
+                </div>
+            </div>
+        </div>
+
         <div class="extras-modal-overlay" id="extras-modal-overlay" onclick="if(event.target===this)closeExtrasModal()">
             <div class="extras-modal" role="dialog" aria-modal="true" aria-labelledby="extras-modal-title">
                 <div class="extras-modal-title"><span id="extras-modal-title">💰 기타 자산 관리</span><button class="btn" onclick="closeExtrasModal()">닫기</button></div>
@@ -1241,7 +1252,7 @@
         <div class="recurring-modal-overlay" id="installment-modal-overlay" onclick="if(event.target===this)closeInstallmentModal()">
             <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="installment-modal-title" style="max-width:900px;">
                 <div class="recurring-modal-heading"><span id="installment-modal-title">💳 할부 내역 직접 관리</span><button class="btn" onclick="closeInstallmentModal()">닫기</button></div>
-                <p class="recurring-modal-intro">거래내역과 별도로 할부 내역을 등록합니다. 입력한 총 금액을 개월수로 나눠 시작월부터 매월 지출에 반영합니다. 거래내역에 같은 구매가 남아 있으면 먼저 삭제해 중복 표시를 막아 주세요.</p>
+                <p class="recurring-modal-intro">여기에 저장한 할부는 거래내역에 새 행을 만들지 않습니다. 총 금액을 개월수로 나눠 시작월부터 해당 월의 총 지출에만 반영합니다.</p>
                 <div class="recurring-section-title" style="display:flex;justify-content:space-between;align-items:center;"><span>등록된 할부</span><span id="installment-summary-text" style="font-size:12px;color:var(--expense-color);font-weight:600;"></span></div>
                 <div class="recurring-saved-list" id="installment-saved-list" style="max-height:35vh;overflow:auto;"></div>
                 <div class="recurring-section-title" id="installment-form-title">새 할부 등록</div>
@@ -1270,7 +1281,6 @@
                 <div class="recurring-modal-actions">
                     <span class="recurring-preview" id="recurring-preview">계좌별 납입 계획을 입력해주세요.</span>
                     <button class="btn" onclick="addRecurringPlanRow()">+ 입력 행 추가</button>
-                    <button class="btn" id="recurring-installment-action" style="display:none" onclick="openInstallmentsFromRecurring()">할부 내역 관리</button>
                     <button class="btn btn-primary" onclick="generateRecurringTransactions()">설정 저장 및 내역 생성</button>
                 </div>
                 <p class="recurring-modal-note">설정 수정은 해당 설정으로 생성된 미수정 내역에 적용됩니다. 거래내역에서 개별 내역을 수정하면 설정에서 분리되어 이후 설정 수정에도 유지되고, 개별 삭제도 가능합니다.</p>
@@ -2069,6 +2079,20 @@
         window.closeInstallmentModal = function () {
             document.getElementById('installment-modal-overlay')?.classList.remove('open');
         };
+        window.openExpenseAddMenu = function () {
+            document.getElementById('expense-add-menu-overlay')?.classList.add('open');
+        };
+        window.closeExpenseAddMenu = function () {
+            document.getElementById('expense-add-menu-overlay')?.classList.remove('open');
+        };
+        window.openExpenseInstallmentManager = function () {
+            window.closeExpenseAddMenu();
+            window.openInstallmentModal();
+        };
+        window.openExpenseRecurringManager = function () {
+            window.closeExpenseAddMenu();
+            window.openRecurringModal('지출');
+        };
         function renderInstallmentList() {
             const list = document.getElementById('installment-saved-list');
             const summary = document.getElementById('installment-summary-text');
@@ -2191,12 +2215,9 @@
             const rows = document.getElementById('recurring-plan-list');
             if (rows) rows.innerHTML = recurringRowHtml({type:currentRecurringType});
             document.getElementById('recurring-form-title').textContent = `새 ${currentRecurringType} 정기 계획`;
-            const installmentAction = document.getElementById('recurring-installment-action');
-            if (installmentAction) installmentAction.style.display = currentRecurringType === '지출' ? '' : 'none';
             document.getElementById('recurring-modal-overlay')?.classList.add('open');
         };
         window.closeRecurringModal = function() { document.getElementById('recurring-modal-overlay')?.classList.remove('open'); };
-        window.openInstallmentsFromRecurring = function() { window.closeRecurringModal(); window.openInstallmentModal(); };
         window.updateRecurringCategoryOptions = function(typeSelect) {
             const row = typeSelect?.closest('.recurring-plan-row');
             const list = row?.querySelector('datalist');
@@ -2429,11 +2450,11 @@
 
             // 이번달 일시불 지출 표시 + 옆에 '+ 할부 ₩00,000' 추가 표시
             const curMonthInstallment = getInstallmentMonthlySum(curYear, curMonth);
-            setMonthEl('kpi-expense-month', mExp, false);
+            setMonthEl('kpi-expense-month', mExp + curMonthInstallment, false);
             const instSubEl = document.getElementById('kpi-installment-sub');
             if (instSubEl) {
                 if (curMonthInstallment > 0) {
-                    instSubEl.innerHTML = ` <span style="color:#60a5fa;font-weight:700;margin-left:2px;">+ 할부 ${formatWon(curMonthInstallment)}</span>`;
+                    instSubEl.innerHTML = ` <span style="color:#60a5fa;font-weight:700;margin-left:2px;">(할부 ${formatWon(curMonthInstallment)} 포함)</span>`;
                 } else {
                     instSubEl.innerHTML = '';
                 }
