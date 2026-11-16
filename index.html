@@ -397,8 +397,8 @@
         .recurring-modal-heading { margin-bottom: 8px; font-size: 16px; font-weight: 700; }
         .recurring-modal-intro, .recurring-modal-note { color: var(--text-dim); font-size: 12px; line-height: 1.6; }
         .recurring-plan-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
-        .recurring-plan-row { display: grid; grid-template-columns: minmax(85px, 0.7fr) minmax(105px, 1fr) minmax(110px, 1.1fr) minmax(130px, 1fr) minmax(130px, 1fr) minmax(110px, 0.9fr) auto; gap: 8px; align-items: center; padding: 10px; background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border-color); border-radius: 10px; }
-        .recurring-plan-labels { display: grid; grid-template-columns: minmax(85px, 0.7fr) minmax(105px, 1fr) minmax(110px, 1.1fr) minmax(130px, 1fr) minmax(130px, 1fr) minmax(110px, 0.9fr) auto; gap: 8px; padding: 0 10px; color: var(--text-dim); font-size: 11px; }
+        .recurring-plan-row { display: grid; grid-template-columns: minmax(80px, .7fr) minmax(100px, .9fr) minmax(140px, 1.2fr) minmax(125px, 1fr) minmax(125px, 1fr) minmax(120px, .9fr) minmax(130px, 1fr) auto; gap: 8px; align-items: center; padding: 10px; background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border-color); border-radius: 10px; }
+        .recurring-plan-labels { display: grid; grid-template-columns: minmax(80px, .7fr) minmax(100px, .9fr) minmax(140px, 1.2fr) minmax(125px, 1fr) minmax(125px, 1fr) minmax(120px, .9fr) minmax(130px, 1fr) auto; gap: 8px; padding: 0 10px; color: var(--text-dim); font-size: 11px; }
         .recurring-plan-row select, .recurring-plan-row input { min-width: 0; width: 100%; }
         .recurring-modal-actions { justify-content: flex-end; flex-wrap: wrap; }
         .recurring-section-title { margin: 16px 0 8px; font-size: 13px; font-weight: 700; }
@@ -408,16 +408,18 @@
         .installment-entry-row { display:grid; grid-template-columns:125px 65px minmax(115px,.85fr) minmax(130px,1fr) minmax(130px,1fr) minmax(170px,1.3fr) 120px 78px minmax(145px,1fr) auto; gap:8px; align-items:center; padding:12px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:10px; }
         .installment-entry-row > * { min-width:0; width:100%; }
         .installment-entry-labels { display:grid; grid-template-columns:125px 65px minmax(115px,.85fr) minmax(130px,1fr) minmax(130px,1fr) minmax(170px,1.3fr) 120px 78px minmax(145px,1fr) auto; gap:8px; padding:0 12px; color:var(--text-dim); font-size:12px; font-weight:600; }
-        .installment-saved-item { display:grid; grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px minmax(130px,1fr) auto; gap:8px; align-items:center; padding:12px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:8px; font-size:13px; }
+        .installment-saved-item { display:grid; grid-template-columns:105px 55px minmax(95px,.8fr) minmax(230px,1.6fr) 115px 72px 72px minmax(175px,1.2fr) 64px; gap:10px; align-items:center; padding:13px 14px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:8px; font-size:13px; }
         .installment-saved-item > * { min-width:0; }
-        .installment-saved-item .installment-item-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
+        .installment-saved-item .installment-item-name { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
         .installment-saved-item .installment-item-detail { color:var(--text-muted); white-space:nowrap; }
+        .installment-saved-content { min-width:0; }
+        .installment-party-line, .installment-payment-sub { display:block; margin-top:4px; overflow:hidden; color:var(--text-dim); font-size:11px; text-overflow:ellipsis; white-space:nowrap; }
         .installment-prepaid .installment-crossout { text-decoration:line-through; opacity:.55; }
         .installment-prepaid-toggle { display:flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap; color:var(--text-dim); font-size:12px; }
         .installment-prepaid-toggle input { width:16px; height:16px; accent-color:var(--primary); cursor:pointer; }
-        .installment-saved-item { grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px 65px minmax(130px,1fr) auto; }
-        .installment-saved-labels { display:grid; grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px 65px minmax(130px,1fr) auto; gap:8px; padding:0 12px; color:var(--text-dim); font-size:12px; font-weight:600; }
-        .installment-saved-item .recurring-saved-actions { display:flex; gap:6px; white-space:nowrap; }
+        .installment-saved-labels { display:grid; grid-template-columns:105px 55px minmax(95px,.8fr) minmax(230px,1.6fr) 115px 72px 72px minmax(175px,1.2fr) 64px; gap:10px; padding:0 14px; color:var(--text-dim); font-size:12px; font-weight:600; }
+        .installment-icon-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+        .installment-icon-actions .btn-icon { font-size:16px; padding:5px; }
         .formula-modal-overlay { position: fixed; inset: 0; z-index: 1002; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(2, 6, 23, 0.78); }
         .formula-modal-overlay.open { display: flex; }
         .formula-modal { width: min(440px, 100%); padding: 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-glow); }
@@ -433,14 +435,17 @@
             .installment-entry-labels { display:none; }
             .installment-entry-row { grid-template-columns:repeat(4,minmax(0,1fr)); }
             .installment-entry-row .installment-save-button { width:auto; justify-self:end; }
-            .installment-saved-item { grid-template-columns:repeat(4,minmax(0,1fr)); }
+            .installment-saved-item { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+            .installment-saved-item .installment-saved-content { grid-column:span 2; }
+            .installment-saved-item .installment-icon-actions { justify-content:flex-start; }
             .installment-saved-item .installment-item-detail { white-space:normal; }
             .installment-saved-labels { display:none; }
         }
         @media (max-width: 600px) {
             .installment-entry-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
             .installment-entry-row .installment-save-button { grid-column:1 / -1; justify-self:end; }
-            .installment-saved-item { grid-template-columns:1fr auto; }
+            .installment-saved-item { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .installment-saved-item .installment-saved-content, .installment-saved-item .installment-payment-cell { grid-column:1 / -1; }
         }
 
         .kpi-amount {
@@ -1278,7 +1283,7 @@
                 <div class="recurring-modal-heading"><span id="installment-modal-title">💳 할부 내역 직접 관리</span><button class="btn" onclick="closeInstallmentModal()">닫기</button></div>
                 <p class="recurring-modal-intro">여기에 저장한 할부는 거래내역에 새 행을 만들지 않습니다. 총 금액을 개월수로 나눠 시작월부터 해당 월의 총 지출에만 반영합니다.</p>
                 <div class="recurring-section-title" style="display:flex;justify-content:space-between;align-items:center;"><span>등록된 할부</span><span id="installment-summary-text" style="font-size:12px;color:var(--expense-color);font-weight:600;"></span></div>
-                <div class="installment-saved-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>구매처</span><span>판매처</span><span>내용</span><span>거래금액</span><span>개월수</span><span>선납</span><span>결제방식</span><span>관리</span></div>
+                <div class="installment-saved-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>내용 · 구매처 · 판매처</span><span>거래금액</span><span>개월수</span><span>선납</span><span>결제방식 · 월 납부액</span><span>관리</span></div>
                 <div class="recurring-saved-list" id="installment-saved-list" style="max-height:35vh;overflow:auto;"></div>
                 <div class="recurring-section-title" id="installment-form-title">새 할부 등록</div>
                 <div class="installment-entry-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>구매처</span><span>판매처</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span></span></div>
@@ -1300,13 +1305,13 @@
         </div>
 
         <div class="recurring-modal-overlay" id="recurring-modal-overlay" onclick="if(event.target===this)closeRecurringModal()">
-            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="recurring-modal-title">
+            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="recurring-modal-title" style="width:min(1400px,96vw);max-width:1400px;">
                 <div class="recurring-modal-heading"><span id="recurring-modal-title">정기 납입 내역 일괄 추가</span><button class="btn" onclick="closeRecurringModal()">닫기</button></div>
                 <p class="recurring-modal-intro">정기 납입 설정을 추가·수정·삭제합니다. 내용에 #만 입력하면 `24/01 - 1차`처럼 시작월부터 월과 회차를 자동 작성합니다. `{월}`과 `{회차}`를 사용해 항목명 안에 연·월과 회차를 넣을 수도 있습니다.</p>
                 <div class="recurring-section-title">저장된 정기 납입</div>
                 <div class="recurring-saved-list" id="recurring-saved-list"></div>
                 <div class="recurring-section-title" id="recurring-form-title">새 정기 납입 설정</div>
-                <div class="recurring-plan-labels"><span>구분</span><span>카테고리</span><span>내용</span><span>시작일</span><span>종료일</span><span>월 납입금액</span><span></span></div>
+                <div class="recurring-plan-labels"><span>구분</span><span>카테고리</span><span>내용</span><span>시작일</span><span>종료일</span><span>월 납입금액</span><span>결제방식</span><span></span></div>
                 <div class="recurring-plan-list" id="recurring-plan-list"></div>
                 <div class="recurring-modal-actions">
                     <span class="recurring-preview" id="recurring-preview">계좌별 납입 계획을 입력해주세요.</span>
@@ -2176,7 +2181,7 @@
                 const endDate = item.endDate ? escapeHtml(item.endDate) : '';
                 const prepaid = item.prepaid === true;
                 const rowClass = prepaid ? 'installment-saved-item installment-prepaid' : 'installment-saved-item';
-                return `<div class="${rowClass}"><span class="installment-item-detail installment-crossout">${escapeHtml(item.startDate || '')}</span><span class="installment-item-detail installment-crossout">지출</span><span class="installment-item-detail installment-crossout">${category}</span><span class="installment-item-detail installment-crossout" title="${escapeHtml(item.merchant || '')}">${escapeHtml(item.merchant || '-')}</span><span class="installment-item-detail installment-crossout" title="${escapeHtml(item.serviceProvider || '')}">${escapeHtml(item.serviceProvider || '-')}</span><strong class="installment-item-name installment-crossout" title="${name}">${name}</strong><strong class="installment-crossout">${total}</strong><span class="installment-item-detail installment-crossout">${months}개월</span><label class="installment-prepaid-toggle"><input type="checkbox" ${prepaid ? 'checked' : ''} aria-label="${name} 선납 처리" onchange="toggleInstallmentPrepaid('${id}', this.checked)"><span>선납</span></label><span class="installment-item-detail installment-crossout">${escapeHtml(item.method || '-')} · 월 ${formatWon(monthly)}${endDate ? ` · 종료 ${endDate}` : ''}</span><span class="recurring-saved-actions"><button class="btn" onclick="editInstallment('${id}')">수정</button> <button class="btn" onclick="deleteInstallment('${id}')">삭제</button></span></div>`;
+                return `<div class="${rowClass}"><span class="installment-item-detail installment-crossout">${escapeHtml(item.startDate || '')}</span><span class="installment-item-detail installment-crossout">지출</span><span class="installment-item-detail installment-crossout">${category}</span><div class="installment-saved-content"><strong class="installment-item-name installment-crossout" title="${name}">${name}</strong><span class="installment-party-line installment-crossout">구매처 ${escapeHtml(item.merchant || '-')} · 판매처 ${escapeHtml(item.serviceProvider || '-')}</span></div><strong class="installment-crossout">${total}</strong><span class="installment-item-detail installment-crossout">${months}개월</span><label class="installment-prepaid-toggle"><input type="checkbox" ${prepaid ? 'checked' : ''} aria-label="${name} 선납 처리" onchange="toggleInstallmentPrepaid('${id}', this.checked)"><span>선납</span></label><span class="installment-item-detail installment-payment-cell installment-crossout"><span>${escapeHtml(item.method || '-')}</span><span class="installment-payment-sub">월 ${formatWon(monthly)}${endDate ? ` · 종료 ${endDate}` : ''}</span></span><span class="installment-icon-actions"><button class="btn-icon" type="button" onclick="editInstallment('${id}')" title="수정" aria-label="할부 수정">✏️</button><button class="btn-icon btn-icon-del" type="button" onclick="deleteInstallment('${id}')" title="삭제" aria-label="할부 삭제">🗑️</button></span></div>`;
             }).join('');
         }
 
@@ -2269,6 +2274,8 @@
             const categoryListId = `recurring-category-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
             const categories = Array.isArray(window.categories?.[type]) ? window.categories[type] : [];
             const categoryOptions = categories.map(category => `<option value="${escapeHtml(category)}"></option>`).join('');
+            const methods = [...new Set([...(Array.isArray(window.categories?.method) ? window.categories.method : []), ...(plan.method ? [plan.method] : [])])];
+            const methodOptions = `<option value="">결제방식 선택</option>` + methods.map(method => `<option value="${escapeHtml(method)}" ${method===plan.method?'selected':''}>${escapeHtml(method)}</option>`).join('');
             return `<div class="recurring-plan-row"${id}>
                 <select class="table-cell-input recurring-type" onchange="updateRecurringCategoryOptions(this)">${recurringTypeOptions(type)}</select>
                 <input class="table-cell-input recurring-category" list="${categoryListId}" value="${escapeHtml(plan.category||'')}" placeholder="카테고리">
@@ -2276,6 +2283,7 @@
                 <input class="table-cell-input recurring-start" type="date" min="0001-01-01" max="9999-12-31" value="${escapeHtml(plan.startDate||'')}">
                 <input class="table-cell-input recurring-end" type="date" min="0001-01-01" max="9999-12-31" value="${escapeHtml(plan.endDate||'')}">
                 <input class="table-cell-input recurring-amount" type="number" min="1" step="1" value="${escapeHtml(plan.amount??'')}" placeholder="월 납입액">
+                <select class="table-cell-input recurring-method" aria-label="결제방식">${methodOptions}</select>
                 <button class="btn" type="button" onclick="this.closest('.recurring-plan-row').remove()" aria-label="입력 행 삭제">×</button>
                 <datalist id="${categoryListId}">${categoryOptions}</datalist>
             </div>`;
@@ -2285,7 +2293,7 @@
             if (!list) return;
             const plans = (window.recurringPlans||[]).filter(p => p.type === currentRecurringType);
             if (!plans.length) { list.innerHTML = '<div class="recurring-saved-row"><span class="recurring-saved-info">등록된 정기 납입 계획이 없습니다.</span></div>'; return; }
-            list.innerHTML = plans.map(p => `<div class="recurring-saved-row"><span class="recurring-saved-info"><strong>${escapeHtml(p.category||'기타')} · ${escapeHtml(p.desc||'')}</strong><br>${escapeHtml(p.startDate||'')} ~ ${escapeHtml(p.endDate||'')} · 월 ${formatWon(parseAmount(p.amount))}</span><button class="btn" onclick="editRecurringPlan('${escapeHtml(p.id)}')">수정</button><button class="btn" onclick="deleteRecurringPlan('${escapeHtml(p.id)}')">삭제</button></div>`).join('');
+            list.innerHTML = plans.map(p => `<div class="recurring-saved-row"><span class="recurring-saved-info"><strong>${escapeHtml(p.category||'기타')} · ${escapeHtml(p.desc||'')}</strong><br>${escapeHtml(p.startDate||'')} ~ ${escapeHtml(p.endDate||'')} · 월 ${formatWon(parseAmount(p.amount))} · ${escapeHtml(p.method||'결제방식 미지정')}</span><button class="btn" onclick="editRecurringPlan('${escapeHtml(p.id)}')">수정</button><button class="btn" onclick="deleteRecurringPlan('${escapeHtml(p.id)}')">삭제</button></div>`).join('');
         }
         window.openRecurringModal = function(type) {
             currentRecurringType = ['지출','저축','투자'].includes(type) ? type : '저축';
@@ -2328,7 +2336,8 @@
                 desc: row.querySelector('.recurring-desc')?.value.trim()||'',
                 startDate: row.querySelector('.recurring-start')?.value||'',
                 endDate: row.querySelector('.recurring-end')?.value||'',
-                amount: parseAmount(row.querySelector('.recurring-amount')?.value)
+                amount: parseAmount(row.querySelector('.recurring-amount')?.value),
+                method: row.querySelector('.recurring-method')?.value||''
             };
         }
         function formatRecurringDate(date) {
@@ -2352,7 +2361,7 @@
                 const date=new Date(y,m,day);
                 if (date>=start && date<=end) {
                     index++;
-                    rows.push({id:`tx_${plan.id}_${y}${String(m+1).padStart(2,'0')}`, recurringPlanId:plan.id, type:plan.type, date:formatRecurringDate(date), category:plan.category, desc:recurringDescription(plan.desc,date,index), merchant:'',serviceProvider:'',amount:plan.amount,method:'',split:1});
+                    rows.push({id:`tx_${plan.id}_${y}${String(m+1).padStart(2,'0')}`, recurringPlanId:plan.id, type:plan.type, date:formatRecurringDate(date), category:plan.category, desc:recurringDescription(plan.desc,date,index), merchant:'',serviceProvider:'',amount:plan.amount,method:plan.method||'',split:1});
                 }
                 m++; if (m>=12) {m=0;y++;}
                 if (index>120) break;
