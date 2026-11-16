@@ -405,15 +405,19 @@
         .recurring-saved-list { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; }
         .recurring-saved-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border-color); border-radius: 8px; font-size: 12px; }
         .recurring-saved-info { flex: 1; min-width: 0; color: var(--text-muted); }
-        .installment-entry-row { display:grid; grid-template-columns: 132px 72px minmax(110px, .9fr) minmax(150px, 1.4fr) 125px 82px minmax(130px, 1fr) auto; gap:7px; align-items:center; padding:10px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:10px; }
+        .installment-entry-row { display:grid; grid-template-columns:125px 65px minmax(115px,.85fr) minmax(130px,1fr) minmax(130px,1fr) minmax(170px,1.3fr) 120px 78px minmax(145px,1fr) auto; gap:8px; align-items:center; padding:12px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:10px; }
         .installment-entry-row > * { min-width:0; width:100%; }
-        .installment-entry-labels { display:grid; grid-template-columns:132px 72px minmax(110px, .9fr) minmax(150px, 1.4fr) 125px 82px minmax(130px, 1fr) auto; gap:7px; padding:0 10px; color:var(--text-dim); font-size:11px; }
-        .installment-saved-item { display:grid; grid-template-columns:minmax(140px,1fr) minmax(75px,.5fr) minmax(100px,.7fr) minmax(150px,1.1fr) minmax(120px,.8fr) auto; gap:10px; align-items:center; padding:9px 10px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:8px; font-size:12px; }
+        .installment-entry-labels { display:grid; grid-template-columns:125px 65px minmax(115px,.85fr) minmax(130px,1fr) minmax(130px,1fr) minmax(170px,1.3fr) 120px 78px minmax(145px,1fr) auto; gap:8px; padding:0 12px; color:var(--text-dim); font-size:12px; font-weight:600; }
+        .installment-saved-item { display:grid; grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px minmax(130px,1fr) auto; gap:8px; align-items:center; padding:12px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:8px; font-size:13px; }
         .installment-saved-item > * { min-width:0; }
         .installment-saved-item .installment-item-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
         .installment-saved-item .installment-item-detail { color:var(--text-muted); white-space:nowrap; }
-        .installment-saved-labels { display:grid; grid-template-columns:105px 60px minmax(95px,.8fr) minmax(140px,1.4fr) 105px 70px minmax(115px,1fr) auto; gap:8px; padding:0 10px; color:var(--text-dim); font-size:11px; }
-        .installment-saved-item { grid-template-columns:105px 60px minmax(95px,.8fr) minmax(140px,1.4fr) 105px 70px minmax(115px,1fr) auto; }
+        .installment-prepaid .installment-crossout { text-decoration:line-through; opacity:.55; }
+        .installment-prepaid-toggle { display:flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap; color:var(--text-dim); font-size:12px; }
+        .installment-prepaid-toggle input { width:16px; height:16px; accent-color:var(--primary); cursor:pointer; }
+        .installment-saved-item { grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px 65px minmax(130px,1fr) auto; }
+        .installment-saved-labels { display:grid; grid-template-columns:105px 55px minmax(90px,.8fr) minmax(110px,1fr) minmax(110px,1fr) minmax(150px,1.3fr) 105px 70px 65px minmax(130px,1fr) auto; gap:8px; padding:0 12px; color:var(--text-dim); font-size:12px; font-weight:600; }
+        .installment-saved-item .recurring-saved-actions { display:flex; gap:6px; white-space:nowrap; }
         .formula-modal-overlay { position: fixed; inset: 0; z-index: 1002; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(2, 6, 23, 0.78); }
         .formula-modal-overlay.open { display: flex; }
         .formula-modal { width: min(440px, 100%); padding: 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-glow); }
@@ -423,15 +427,20 @@
         .formula-option input { accent-color: var(--primary); }
         .formula-modal-note { color: var(--text-dim); font-size: 11px; line-height: 1.5; }
         .recurring-preview { flex: 1; min-width: 200px; margin-right: auto; color: var(--text-muted); font-size: 12px; }
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             .recurring-plan-labels { display: none; }
             .recurring-plan-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .installment-entry-labels { display:none; }
-            .installment-entry-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
-            .installment-entry-row .installment-save-button { grid-column:1 / -1; width:auto; justify-self:end; }
-            .installment-saved-item { grid-template-columns:1fr auto; }
+            .installment-entry-row { grid-template-columns:repeat(4,minmax(0,1fr)); }
+            .installment-entry-row .installment-save-button { width:auto; justify-self:end; }
+            .installment-saved-item { grid-template-columns:repeat(4,minmax(0,1fr)); }
             .installment-saved-item .installment-item-detail { white-space:normal; }
             .installment-saved-labels { display:none; }
+        }
+        @media (max-width: 600px) {
+            .installment-entry-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .installment-entry-row .installment-save-button { grid-column:1 / -1; justify-self:end; }
+            .installment-saved-item { grid-template-columns:1fr auto; }
         }
 
         .kpi-amount {
@@ -1265,18 +1274,20 @@
         
         <!-- 사용자가 직접 입력하고 Firebase에 저장하는 할부 관리 창 -->
         <div class="recurring-modal-overlay" id="installment-modal-overlay" onclick="if(event.target===this)closeInstallmentModal()">
-            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="installment-modal-title" style="max-width:1180px;">
+            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="installment-modal-title" style="width:min(1500px,96vw);max-width:1500px;max-height:90vh;overflow-x:hidden;">
                 <div class="recurring-modal-heading"><span id="installment-modal-title">💳 할부 내역 직접 관리</span><button class="btn" onclick="closeInstallmentModal()">닫기</button></div>
                 <p class="recurring-modal-intro">여기에 저장한 할부는 거래내역에 새 행을 만들지 않습니다. 총 금액을 개월수로 나눠 시작월부터 해당 월의 총 지출에만 반영합니다.</p>
                 <div class="recurring-section-title" style="display:flex;justify-content:space-between;align-items:center;"><span>등록된 할부</span><span id="installment-summary-text" style="font-size:12px;color:var(--expense-color);font-weight:600;"></span></div>
-                <div class="installment-saved-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span>관리</span></div>
+                <div class="installment-saved-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>구매처</span><span>판매처</span><span>내용</span><span>거래금액</span><span>개월수</span><span>선납</span><span>결제방식</span><span>관리</span></div>
                 <div class="recurring-saved-list" id="installment-saved-list" style="max-height:35vh;overflow:auto;"></div>
                 <div class="recurring-section-title" id="installment-form-title">새 할부 등록</div>
-                <div class="installment-entry-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span></span></div>
+                <div class="installment-entry-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>구매처</span><span>판매처</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span></span></div>
                 <div class="installment-entry-row">
-                    <input type="date" class="table-cell-input" id="inst-input-start" aria-label="할부 시작일" oninput="updateInstallmentPreview()">
+                    <input type="date" class="table-cell-input" id="inst-input-start" min="0001-01-01" max="9999-12-31" aria-label="할부 시작일" oninput="updateInstallmentPreview()">
                     <input type="text" class="table-cell-input" value="지출" aria-label="구분" readonly>
                     <select class="table-cell-input" id="inst-input-category" aria-label="지출 카테고리"></select>
+                    <input type="text" class="table-cell-input" id="inst-input-merchant" placeholder="구매처" maxlength="80" aria-label="구매처">
+                    <input type="text" class="table-cell-input" id="inst-input-provider" placeholder="판매처" maxlength="80" aria-label="판매처">
                     <input type="text" class="table-cell-input" id="inst-input-name" placeholder="내용" maxlength="80" aria-label="내용">
                     <input type="number" min="1" step="1" class="table-cell-input" id="inst-input-amount" placeholder="거래금액" aria-label="총 거래금액" oninput="updateInstallmentPreview()">
                     <input type="number" min="2" max="120" class="table-cell-input" id="inst-input-months" placeholder="개월수" aria-label="개월수" oninput="updateInstallmentPreview()">
@@ -1321,7 +1332,7 @@
                             <select id="filter-year" onchange="handleYearFilterChange()" style="padding:7px 8px;">
                                 <option value="all">전체 연도</option>
                             </select>
-                            <input id="filter-year-custom" type="number" min="1900" max="2200" placeholder="연도 입력" aria-label="조회할 연도 직접 입력" oninput="handleFilter()" style="display:none;width:94px;padding:7px 8px;" />
+                            <input id="filter-year-custom" type="number" min="1000" max="9999" placeholder="연도 입력" aria-label="조회할 연도 직접 입력" oninput="this.value=this.value.slice(0,4);handleFilter()" style="display:none;width:94px;padding:7px 8px;" />
                             <select id="filter-month" onchange="handleFilter()" style="padding:7px 8px;">
                                 <option value="all">전체 월</option>
                                 <option value="1">1월</option>
@@ -1973,6 +1984,18 @@
             return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         }
 
+        function isValidFourDigitISODate(value) {
+            const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+            if (!match) return false;
+            const [, yearText, monthText, dayText] = match;
+            const year = Number(yearText), month = Number(monthText), day = Number(dayText);
+            if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) return false;
+            const date = new Date(0);
+            date.setUTCHours(0, 0, 0, 0);
+            date.setUTCFullYear(year, month - 1, day);
+            return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+        }
+
         function formatDateWithDay(dateInput) {
             if (!dateInput) return formatDateWithDay(getLocalDateISO());
             const clean = dateInput.toString().replace(/[^0-9]/g, '');
@@ -2067,6 +2090,7 @@
         }
 
         function getInstallmentMonthAmount(installment, targetMonth) {
+            if (installment.prepaid === true) return 0;
             const period = getInstallmentPeriod(installment);
             if (!period || targetMonth < period.startMonth || targetMonth > period.endMonth) return 0;
             const total = parseAmount(installment.totalAmount ?? installment.amount);
@@ -2132,7 +2156,11 @@
             const summary = document.getElementById('installment-summary-text');
             if (!list) return;
             const items = getInstallmentTransactions().slice().sort((a,b) => String(b.startDate).localeCompare(String(a.startDate)));
-            if (summary) summary.textContent = `${items.length}건 · 총 ${formatWon(items.reduce((n,x)=>n+parseAmount(x.totalAmount ?? x.amount),0))}`;
+            if (summary) {
+                const activeTotal = items.filter(item => item.prepaid !== true).reduce((n,x)=>n+parseAmount(x.totalAmount ?? x.amount),0);
+                const prepaidCount = items.filter(item => item.prepaid === true).length;
+                summary.textContent = `${items.length}건 · 반영 중 ${formatWon(activeTotal)}${prepaidCount ? ` · 선납 ${prepaidCount}건 제외` : ''}`;
+            }
             if (!items.length) {
                 list.innerHTML = '<div class="recurring-empty">등록된 할부 내역이 없습니다. 아래에서 직접 추가해 주세요.</div>';
                 return;
@@ -2146,7 +2174,9 @@
                 const category = escapeHtml(item.category || '기타');
                 const total = formatWon(parseAmount(item.totalAmount ?? item.amount));
                 const endDate = item.endDate ? escapeHtml(item.endDate) : '';
-                return `<div class="installment-saved-item"><span class="installment-item-detail">${escapeHtml(item.startDate || '')}</span><span class="installment-item-detail">지출</span><span class="installment-item-detail">${category}</span><strong class="installment-item-name" title="${name}">${name}</strong><strong>${total}</strong><span class="installment-item-detail">${months}개월</span><span class="installment-item-detail">${escapeHtml(item.method || '-')} · 월 ${formatWon(monthly)}${endDate ? ` · 종료 ${endDate}` : ''}</span><span class="recurring-saved-actions"><button class="btn" onclick="editInstallment('${id}')">수정</button> <button class="btn" onclick="deleteInstallment('${id}')">삭제</button></span></div>`;
+                const prepaid = item.prepaid === true;
+                const rowClass = prepaid ? 'installment-saved-item installment-prepaid' : 'installment-saved-item';
+                return `<div class="${rowClass}"><span class="installment-item-detail installment-crossout">${escapeHtml(item.startDate || '')}</span><span class="installment-item-detail installment-crossout">지출</span><span class="installment-item-detail installment-crossout">${category}</span><span class="installment-item-detail installment-crossout" title="${escapeHtml(item.merchant || '')}">${escapeHtml(item.merchant || '-')}</span><span class="installment-item-detail installment-crossout" title="${escapeHtml(item.serviceProvider || '')}">${escapeHtml(item.serviceProvider || '-')}</span><strong class="installment-item-name installment-crossout" title="${name}">${name}</strong><strong class="installment-crossout">${total}</strong><span class="installment-item-detail installment-crossout">${months}개월</span><label class="installment-prepaid-toggle"><input type="checkbox" ${prepaid ? 'checked' : ''} aria-label="${name} 선납 처리" onchange="toggleInstallmentPrepaid('${id}', this.checked)"><span>선납</span></label><span class="installment-item-detail installment-crossout">${escapeHtml(item.method || '-')} · 월 ${formatWon(monthly)}${endDate ? ` · 종료 ${endDate}` : ''}</span><span class="recurring-saved-actions"><button class="btn" onclick="editInstallment('${id}')">수정</button> <button class="btn" onclick="deleteInstallment('${id}')">삭제</button></span></div>`;
             }).join('');
         }
 
@@ -2162,7 +2192,7 @@
         };
 
         window.resetInstallmentForm = function () {
-            ['inst-input-name','inst-input-amount','inst-input-months','inst-input-start','inst-edit-id'].forEach(id => {
+            ['inst-input-name','inst-input-merchant','inst-input-provider','inst-input-amount','inst-input-months','inst-input-start','inst-edit-id'].forEach(id => {
                 const input = document.getElementById(id); if (input) input.value = '';
             });
             populateInstallmentSelects();
@@ -2177,6 +2207,8 @@
             if (!item) return;
             populateInstallmentSelects(item.category || '', item.method || '');
             document.getElementById('inst-input-name').value = item.name || '';
+            document.getElementById('inst-input-merchant').value = item.merchant || '';
+            document.getElementById('inst-input-provider').value = item.serviceProvider || '';
             document.getElementById('inst-input-amount').value = parseAmount(item.totalAmount ?? item.amount);
             document.getElementById('inst-input-months').value = item.months || '';
             document.getElementById('inst-input-start').value = item.startDate || '';
@@ -2188,19 +2220,22 @@
         window.saveInstallment = async function () {
             if (!window.requireFirebaseWrite()) return;
             const name = document.getElementById('inst-input-name').value.trim();
+            const merchant = document.getElementById('inst-input-merchant').value.trim();
+            const serviceProvider = document.getElementById('inst-input-provider').value.trim();
             const category = document.getElementById('inst-input-category').value.trim();
             const method = document.getElementById('inst-input-method').value.trim();
             const totalAmount = parseAmount(document.getElementById('inst-input-amount').value);
             const months = parseInt(document.getElementById('inst-input-months').value,10);
             const startDate = document.getElementById('inst-input-start').value;
             const editId = document.getElementById('inst-edit-id').value;
-            if (!startDate || !category || !name || totalAmount <= 0 || !Number.isInteger(months) || months < 2 || months > 120) {
+            if (!isValidFourDigitISODate(startDate) || !category || !name || totalAmount <= 0 || !Number.isInteger(months) || months < 2 || months > 120) {
                 showToast('날짜, 지출 카테고리, 내용, 거래금액, 2~120개월을 확인해 주세요.'); return;
             }
             const [year,month,day] = startDate.split('-').map(Number);
             const end = new Date(year, month - 1 + months - 1, day);
             const endDate = `${end.getFullYear()}-${String(end.getMonth()+1).padStart(2,'0')}-${String(end.getDate()).padStart(2,'0')}`;
-            const record = { id: editId || `inst_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, type: '지출', name, category, totalAmount, months, startDate, endDate, method };
+            if (!isValidFourDigitISODate(endDate)) { showToast('할부 종료 연도는 네 자리 연도까지만 입력할 수 있습니다.'); return; }
+            const record = { id: editId || `inst_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, type: '지출', name, category, merchant, serviceProvider, totalAmount, months, startDate, endDate, method };
             const previous = window.installments;
             window.installments = editId ? previous.map(x => x.id === editId ? record : x) : [...previous, record];
             if (!await window.saveDataToCloud()) { window.installments = previous; return; }
@@ -2213,6 +2248,15 @@
             window.installments = previous.filter(x => x.id !== id);
             if (!await window.saveDataToCloud()) { window.installments = previous; return; }
             renderInstallmentList(); renderAll(); showToast('할부 내역을 삭제했습니다.');
+        };
+
+        window.toggleInstallmentPrepaid = async function (id, checked) {
+            if (!window.requireFirebaseWrite()) { renderInstallmentList(); return; }
+            const previous = window.installments;
+            window.installments = previous.map(item => item.id === id ? { ...item, prepaid: Boolean(checked) } : item);
+            if (!await window.saveDataToCloud()) { window.installments = previous; renderInstallmentList(); return; }
+            renderInstallmentList(); renderAll();
+            showToast(checked ? '선납 처리했습니다. 할부 지출 합계에서 제외됩니다.' : '선납을 해제했습니다. 해당 월 지출에 다시 반영됩니다.');
         };
 
         let currentRecurringType = '저축';
@@ -2229,8 +2273,8 @@
                 <select class="table-cell-input recurring-type" onchange="updateRecurringCategoryOptions(this)">${recurringTypeOptions(type)}</select>
                 <input class="table-cell-input recurring-category" list="${categoryListId}" value="${escapeHtml(plan.category||'')}" placeholder="카테고리">
                 <input class="table-cell-input recurring-desc" value="${escapeHtml(plan.desc||'')}" placeholder="항목명 / # / {월} {회차}" maxlength="100">
-                <input class="table-cell-input recurring-start" type="date" value="${escapeHtml(plan.startDate||'')}">
-                <input class="table-cell-input recurring-end" type="date" value="${escapeHtml(plan.endDate||'')}">
+                <input class="table-cell-input recurring-start" type="date" min="0001-01-01" max="9999-12-31" value="${escapeHtml(plan.startDate||'')}">
+                <input class="table-cell-input recurring-end" type="date" min="0001-01-01" max="9999-12-31" value="${escapeHtml(plan.endDate||'')}">
                 <input class="table-cell-input recurring-amount" type="number" min="1" step="1" value="${escapeHtml(plan.amount??'')}" placeholder="월 납입액">
                 <button class="btn" type="button" onclick="this.closest('.recurring-plan-row').remove()" aria-label="입력 행 삭제">×</button>
                 <datalist id="${categoryListId}">${categoryOptions}</datalist>
@@ -2320,7 +2364,7 @@
             const rows=[...document.querySelectorAll('#recurring-plan-list .recurring-plan-row')];
             if (!rows.length) { showToast('입력 행을 추가해 주세요.'); return; }
             const submitted=rows.map(getRecurringPlanFromRow);
-            const valid=submitted.every(p=>['지출','저축','투자'].includes(p.type)&&p.desc&&p.startDate&&p.endDate&&p.amount>0&&p.endDate>=p.startDate);
+            const valid=submitted.every(p=>['지출','저축','투자'].includes(p.type)&&p.desc&&isValidFourDigitISODate(p.startDate)&&isValidFourDigitISODate(p.endDate)&&p.amount>0&&p.endDate>=p.startDate);
             if (!valid) { showToast('구분, 내용, 시작일, 종료일, 월 납입액을 확인해 주세요.'); return; }
             if (submitted.some(p=>{const [a,b,c]=p.startDate.split('-').map(Number),[d,e,f]=p.endDate.split('-').map(Number);return (d*12+e)-(a*12+b)>120;})) { showToast('정기 계획 기간은 최대 10년까지 입력할 수 있습니다.'); return; }
             const ids=new Set(submitted.map(p=>p.id));
@@ -2681,7 +2725,7 @@
                     const methodOptionsHtml = buildTableAutocompleteOptions(allowedMethods);
 
                     tr.innerHTML = `
-                        <td class="td-date"><input type="date" class="table-cell-input" value="${escapeHtml(formatToInputDate(item.date))}" onchange="updateTransactionField('${item.id}', 'date', this.value)" /></td>
+                        <td class="td-date"><input type="date" class="table-cell-input" min="0001-01-01" max="9999-12-31" value="${escapeHtml(formatToInputDate(item.date))}" onchange="updateTransactionField('${item.id}', 'date', this.value)" /></td>
                         <td class="td-type">
                             <div class="table-autocomplete">
                                 <input type="text" class="table-cell-input" value="${escapeHtml(item.type || '')}" onfocus="showTableAutocomplete(this)" oninput="filterTableAutocomplete(this)" onblur="hideTableAutocomplete(this)" onchange="updateTransactionField('${item.id}', 'type', this.value)" placeholder="구분 입력" />
@@ -2769,6 +2813,7 @@
             if (!window.requireFirebaseWrite()) return;
             const item = window.transactions.find(t => t.id === id);
             if (!item) return;
+            if (field === 'date' && !isValidFourDigitISODate(val)) { showToast('날짜 연도는 네 자리로 입력해 주세요.'); renderAll(); return; }
             // A manually changed generated installment becomes independent from its recurring plan.
             delete item.recurringPlanId;
 
