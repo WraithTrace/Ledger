@@ -405,6 +405,15 @@
         .recurring-saved-list { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; }
         .recurring-saved-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border-color); border-radius: 8px; font-size: 12px; }
         .recurring-saved-info { flex: 1; min-width: 0; color: var(--text-muted); }
+        .installment-entry-row { display:grid; grid-template-columns: 132px 72px minmax(110px, .9fr) minmax(150px, 1.4fr) 125px 82px minmax(130px, 1fr) auto; gap:7px; align-items:center; padding:10px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:10px; }
+        .installment-entry-row > * { min-width:0; width:100%; }
+        .installment-entry-labels { display:grid; grid-template-columns:132px 72px minmax(110px, .9fr) minmax(150px, 1.4fr) 125px 82px minmax(130px, 1fr) auto; gap:7px; padding:0 10px; color:var(--text-dim); font-size:11px; }
+        .installment-saved-item { display:grid; grid-template-columns:minmax(140px,1fr) minmax(75px,.5fr) minmax(100px,.7fr) minmax(150px,1.1fr) minmax(120px,.8fr) auto; gap:10px; align-items:center; padding:9px 10px; background:rgba(0,0,0,.28); border:1px solid var(--border-color); border-radius:8px; font-size:12px; }
+        .installment-saved-item > * { min-width:0; }
+        .installment-saved-item .installment-item-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
+        .installment-saved-item .installment-item-detail { color:var(--text-muted); white-space:nowrap; }
+        .installment-saved-labels { display:grid; grid-template-columns:105px 60px minmax(95px,.8fr) minmax(140px,1.4fr) 105px 70px minmax(115px,1fr) auto; gap:8px; padding:0 10px; color:var(--text-dim); font-size:11px; }
+        .installment-saved-item { grid-template-columns:105px 60px minmax(95px,.8fr) minmax(140px,1.4fr) 105px 70px minmax(115px,1fr) auto; }
         .formula-modal-overlay { position: fixed; inset: 0; z-index: 1002; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(2, 6, 23, 0.78); }
         .formula-modal-overlay.open { display: flex; }
         .formula-modal { width: min(440px, 100%); padding: 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-glow); }
@@ -417,6 +426,12 @@
         @media (max-width: 900px) {
             .recurring-plan-labels { display: none; }
             .recurring-plan-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .installment-entry-labels { display:none; }
+            .installment-entry-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .installment-entry-row .installment-save-button { grid-column:1 / -1; width:auto; justify-self:end; }
+            .installment-saved-item { grid-template-columns:1fr auto; }
+            .installment-saved-item .installment-item-detail { white-space:normal; }
+            .installment-saved-labels { display:none; }
         }
 
         .kpi-amount {
@@ -1250,20 +1265,24 @@
         
         <!-- 사용자가 직접 입력하고 Firebase에 저장하는 할부 관리 창 -->
         <div class="recurring-modal-overlay" id="installment-modal-overlay" onclick="if(event.target===this)closeInstallmentModal()">
-            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="installment-modal-title" style="max-width:900px;">
+            <div class="recurring-modal" role="dialog" aria-modal="true" aria-labelledby="installment-modal-title" style="max-width:1180px;">
                 <div class="recurring-modal-heading"><span id="installment-modal-title">💳 할부 내역 직접 관리</span><button class="btn" onclick="closeInstallmentModal()">닫기</button></div>
                 <p class="recurring-modal-intro">여기에 저장한 할부는 거래내역에 새 행을 만들지 않습니다. 총 금액을 개월수로 나눠 시작월부터 해당 월의 총 지출에만 반영합니다.</p>
                 <div class="recurring-section-title" style="display:flex;justify-content:space-between;align-items:center;"><span>등록된 할부</span><span id="installment-summary-text" style="font-size:12px;color:var(--expense-color);font-weight:600;"></span></div>
+                <div class="installment-saved-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span>관리</span></div>
                 <div class="recurring-saved-list" id="installment-saved-list" style="max-height:35vh;overflow:auto;"></div>
                 <div class="recurring-section-title" id="installment-form-title">새 할부 등록</div>
-                <div class="recurring-plan-row" style="grid-template-columns:minmax(160px,1.5fr) minmax(110px,1fr) minmax(125px,1fr) minmax(85px,.7fr) minmax(130px,1fr) auto;">
-                    <input type="text" class="table-cell-input" id="inst-input-name" placeholder="할부 항목명" maxlength="80" aria-label="할부 항목명">
-                    <input type="text" class="table-cell-input" id="inst-input-category" placeholder="카테고리" maxlength="40" aria-label="카테고리">
-                    <input type="number" min="1" step="1" class="table-cell-input" id="inst-input-amount" placeholder="총 거래금액" aria-label="총 거래금액" oninput="updateInstallmentPreview()">
-                    <input type="number" min="2" max="120" class="table-cell-input" id="inst-input-months" placeholder="개월수" aria-label="개월수" oninput="updateInstallmentPreview()">
+                <div class="installment-entry-labels"><span>날짜</span><span>구분</span><span>카테고리</span><span>내용</span><span>거래금액</span><span>개월수</span><span>결제방식</span><span></span></div>
+                <div class="installment-entry-row">
                     <input type="date" class="table-cell-input" id="inst-input-start" aria-label="할부 시작일" oninput="updateInstallmentPreview()">
+                    <input type="text" class="table-cell-input" value="지출" aria-label="구분" readonly>
+                    <select class="table-cell-input" id="inst-input-category" aria-label="지출 카테고리"></select>
+                    <input type="text" class="table-cell-input" id="inst-input-name" placeholder="내용" maxlength="80" aria-label="내용">
+                    <input type="number" min="1" step="1" class="table-cell-input" id="inst-input-amount" placeholder="거래금액" aria-label="총 거래금액" oninput="updateInstallmentPreview()">
+                    <input type="number" min="2" max="120" class="table-cell-input" id="inst-input-months" placeholder="개월수" aria-label="개월수" oninput="updateInstallmentPreview()">
+                    <select class="table-cell-input" id="inst-input-method" aria-label="결제방식"></select>
                     <input type="hidden" id="inst-edit-id" value="">
-                    <button class="btn btn-primary" type="button" onclick="saveInstallment()">저장</button>
+                    <button class="btn btn-primary installment-save-button" type="button" onclick="saveInstallment()">저장</button>
                 </div>
                 <div class="recurring-modal-actions" style="margin-top:12px;"><span class="recurring-preview" id="installment-preview-text">항목명, 총 금액, 개월수, 시작일을 입력해 주세요.</span><button class="btn" type="button" onclick="resetInstallmentForm()">입력 초기화</button></div>
             </div>
@@ -2072,7 +2091,22 @@
             }, 0);
         }
 
+        function populateInstallmentSelects(categoryValue = '', methodValue = '') {
+            const categorySelect = document.getElementById('inst-input-category');
+            const methodSelect = document.getElementById('inst-input-method');
+            if (categorySelect) {
+                const categories = [...new Set([...(Array.isArray(window.categories?.['지출']) ? window.categories['지출'] : []), ...(categoryValue ? [categoryValue] : [])])];
+                categorySelect.innerHTML = '<option value="">카테고리 선택</option>' + categories.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+                categorySelect.value = categories.includes(categoryValue) ? categoryValue : '';
+            }
+            if (methodSelect) {
+                const methods = [...new Set([...(Array.isArray(window.categories?.method) ? window.categories.method : []), ...(methodValue ? [methodValue] : [])])];
+                methodSelect.innerHTML = '<option value="">결제방식 선택</option>' + methods.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+                methodSelect.value = methods.includes(methodValue) ? methodValue : '';
+            }
+        }
         window.openInstallmentModal = function () {
+            populateInstallmentSelects();
             renderInstallmentList();
             document.getElementById('installment-modal-overlay')?.classList.add('open');
         };
@@ -2112,7 +2146,7 @@
                 const category = escapeHtml(item.category || '기타');
                 const total = formatWon(parseAmount(item.totalAmount ?? item.amount));
                 const endDate = item.endDate ? escapeHtml(item.endDate) : '';
-                return `<div class="recurring-saved-item"><div class="recurring-saved-main"><strong>${name}</strong><span>${category} · ${escapeHtml(item.startDate || '')}${endDate ? ` ~ ${endDate}` : ''}</span></div><div class="recurring-saved-meta"><strong>${total}</strong><span>${months}개월 · 월 ${formatWon(monthly)}</span></div><div class="recurring-saved-actions"><button class="btn" onclick="editInstallment('${id}')">수정</button><button class="btn" onclick="deleteInstallment('${id}')">삭제</button></div></div>`;
+                return `<div class="installment-saved-item"><span class="installment-item-detail">${escapeHtml(item.startDate || '')}</span><span class="installment-item-detail">지출</span><span class="installment-item-detail">${category}</span><strong class="installment-item-name" title="${name}">${name}</strong><strong>${total}</strong><span class="installment-item-detail">${months}개월</span><span class="installment-item-detail">${escapeHtml(item.method || '-')} · 월 ${formatWon(monthly)}${endDate ? ` · 종료 ${endDate}` : ''}</span><span class="recurring-saved-actions"><button class="btn" onclick="editInstallment('${id}')">수정</button> <button class="btn" onclick="deleteInstallment('${id}')">삭제</button></span></div>`;
             }).join('');
         }
 
@@ -2128,9 +2162,10 @@
         };
 
         window.resetInstallmentForm = function () {
-            ['inst-input-name','inst-input-category','inst-input-amount','inst-input-months','inst-input-start','inst-edit-id'].forEach(id => {
+            ['inst-input-name','inst-input-amount','inst-input-months','inst-input-start','inst-edit-id'].forEach(id => {
                 const input = document.getElementById(id); if (input) input.value = '';
             });
+            populateInstallmentSelects();
             const title = document.getElementById('installment-form-title');
             if (title) title.textContent = '새 할부 등록';
             window.updateInstallmentPreview();
@@ -2140,8 +2175,8 @@
             if (!window.requireFirebaseWrite()) return;
             const item = getInstallmentTransactions().find(x => x.id === id);
             if (!item) return;
+            populateInstallmentSelects(item.category || '', item.method || '');
             document.getElementById('inst-input-name').value = item.name || '';
-            document.getElementById('inst-input-category').value = item.category || '';
             document.getElementById('inst-input-amount').value = parseAmount(item.totalAmount ?? item.amount);
             document.getElementById('inst-input-months').value = item.months || '';
             document.getElementById('inst-input-start').value = item.startDate || '';
@@ -2153,18 +2188,19 @@
         window.saveInstallment = async function () {
             if (!window.requireFirebaseWrite()) return;
             const name = document.getElementById('inst-input-name').value.trim();
-            const category = document.getElementById('inst-input-category').value.trim() || '기타';
+            const category = document.getElementById('inst-input-category').value.trim();
+            const method = document.getElementById('inst-input-method').value.trim();
             const totalAmount = parseAmount(document.getElementById('inst-input-amount').value);
             const months = parseInt(document.getElementById('inst-input-months').value,10);
             const startDate = document.getElementById('inst-input-start').value;
             const editId = document.getElementById('inst-edit-id').value;
-            if (!name || totalAmount <= 0 || !Number.isInteger(months) || months < 2 || months > 120 || !/^\d{4}-\d{2}-\d{2}$/.test(startDate)) {
-                showToast('항목명, 총 금액, 2~120개월, 시작일을 확인해 주세요.'); return;
+            if (!startDate || !category || !name || totalAmount <= 0 || !Number.isInteger(months) || months < 2 || months > 120) {
+                showToast('날짜, 지출 카테고리, 내용, 거래금액, 2~120개월을 확인해 주세요.'); return;
             }
             const [year,month,day] = startDate.split('-').map(Number);
             const end = new Date(year, month - 1 + months - 1, day);
             const endDate = `${end.getFullYear()}-${String(end.getMonth()+1).padStart(2,'0')}-${String(end.getDate()).padStart(2,'0')}`;
-            const record = { id: editId || `inst_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, name, category, totalAmount, months, startDate, endDate };
+            const record = { id: editId || `inst_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, type: '지출', name, category, totalAmount, months, startDate, endDate, method };
             const previous = window.installments;
             window.installments = editId ? previous.map(x => x.id === editId ? record : x) : [...previous, record];
             if (!await window.saveDataToCloud()) { window.installments = previous; return; }
